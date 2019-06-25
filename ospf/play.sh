@@ -11,8 +11,8 @@ case "$1" in
 		for router in ${ROUTERS[@]}
 		do
 			ip netns add ${router} 
-
 		done 
+	
 		ip link add r1_r2 type veth peer name r2_r1
 		ip link add r2_r3 type veth peer name r3_r2
 		ip link add r1_h1 type veth peer name h1_r1
@@ -39,6 +39,7 @@ case "$1" in
 		ip netns exec r3 ip addr add 10.0.3.1/24 dev r3_h3
 		ip netns exec h3 ip addr add 10.0.3.2/24 dev h3_r3
 		;;
+	
 	run)
 		for router in ${ROUTERS[@]}
 		do
@@ -56,6 +57,7 @@ case "$1" in
 				-z ${VAR}/${router}_zebra.vty
 		done
 		;;
+	
 	*)
 		echo nothing to do 
 		;;	
