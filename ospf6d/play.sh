@@ -38,6 +38,18 @@ case "$1" in
 		ip netns exec h2 ip addr add fe00:b::2/64 dev h2_r2
 		ip netns exec r3 ip addr add fe00:c::1/64 dev r3_h3
 		ip netns exec h3 ip addr add fe00:c::2/64 dev h3_r3
+
+		ip netns exec r1 echo 1 > /proc/sys/net/ipv6/conf/r1_r2/seg6_enabled
+		ip netns exec r2 echo 1 > /proc/sys/net/ipv6/conf/r2_r1/seg6_enabled
+		ip netns exec r2 echo 1 > /proc/sys/net/ipv6/conf/r2_r3/seg6_enabled
+		ip netns exec r3 echo 1 > /proc/sys/net/ipv6/conf/r3_r2/seg6_enabled
+		ip netns exec r1 echo 1 > /proc/sys/net/ipv6/conf/r1_h1/seg6_enabled
+		ip netns exec h1 echo 1 > /proc/sys/net/ipv6/conf/h1_r1/seg6_enabled
+		ip netns exec r2 echo 1 > /proc/sys/net/ipv6/conf/r2_h2/seg6_enabled
+		ip netns exec h2 echo 1 > /proc/sys/net/ipv6/conf/h2_r2/seg6_enabled
+		ip netns exec r3 echo 1 > /proc/sys/net/ipv6/conf/r3_h3/seg6_enabled
+		ip netns exec h3 echo 1 > /proc/sys/net/ipv6/conf/h3_r3/seg6_enabled
+
 		;;
 	
 	run)
