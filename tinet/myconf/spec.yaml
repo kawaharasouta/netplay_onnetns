@@ -1,20 +1,20 @@
 nodes:
   - name: R1
-    image: ubuntu:18.04
+    image: slankdev/ubuntu:18.04
     interfaces:
       - { name: toR2, type: direct, args: R2#toR2 }
       - { name: toR4, type: direct, args: R4#toR4 }
   - name: R2
-    image: ubuntu:18.04
+    image: slankdev/ubuntu:18.04
     interfaces:
       - { name: toR1, type: direct, args: R1#toR1 }
       - { name: toR3, type: direct, args: R3#toR3 }
   - name: R3
-    image: ubuntu:18.04
+    image: slankdev/ubuntu:18.04
     interfaces:
       - { name: toR2, type: direct, args: R2#toR2 }
   - name: R4
-    image: ubuntu:18.04
+    image: slankdev/ubuntu:18.04
     interfaces:
       - { name: toR1, type: direct, args: R1#toR1 }
 
@@ -31,10 +31,10 @@ node_configs:
       - cmd: ip addr add 10.0.3.2/24 dev toR3
   - name: R3
     cmds:
-      - cmd: ip -6 addr add 2001:2::4/64 dev toR1
+      - cmd: ip -6 addr add 2001:3::3/64 dev toR2
       - cmd: ip addr add 10.0.3.3/24 dev toR2
   - name: R4
     cmds:
-      - cmd: ip -6 addr add 2001:3::3/64 dev toR1
+      - cmd: ip -6 addr add 2001:2::4/64 dev toR1
       - cmd: ip addr add 10.0.2.4/24 dev toR1
 
